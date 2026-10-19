@@ -1,0 +1,40 @@
+# YOLOv9
+
+# parameters
+nc: 15  # number of classes
+
+# gelan backbone
+backbone:
+  - [-1, 1, Conv, [64, 3, 2]]  # 0-P1/2
+  - [-1, 1, Conv, [128, 3, 2]]  # 1-P2/4
+  - [-1, 1, RepNCSPELAN4, [256, 128, 64, 1]]  # 2
+  - [-1, 1, ADown, [256]]  # 3-P3/8
+  - [-1, 1, RepNCSPELAN4, [512, 256, 128, 1]]  # 4
+  - [-1, 1, ADown, [512]]  # 5-P4/16
+  - [-1, 1, RepNCSPELAN4, [512, 512, 256, 1]]  # 6
+  - [-1, 1, ADown, [512]]  # 7-P5/32
+  - [-1, 1, RepNCSPELAN4, [512, 512, 256, 1]]  # 8
+  - [-1, 1, SPPELAN, [512, 256]]  # 9
+
+head:
+  - [-1, 1, nn.Upsample, [None, 2, 'nearest']] # 10
+  - [-1, 1, ShiftViTBlockv2, [512]] # 11
+  - [[-1, 6], 1, Concat, [1]]  # cat backbone P4 # 12
+  - [-1, 1, RepNCSPELAN4, [512, 512, 256, 1]]  # 13
+
+  - [-1, 1, nn.Upsample, [None, 2, 'nearest']] # 14
+  - [-1, 1, ShiftViTBlockv2, [512]] # 15
+  - [[-1, 4], 1, Concat, [1]]  # cat backbone P3 # 16
+  - [-1, 1, RepNCSPELAN4, [256, 256, 128, 1]]  # 17 (P3/8-small)
+ 
+  - [-1, 1, ADown, [256]] # 18
+  - [-1, 1, ShiftViTBlockv2, [256]] # 19
+  - [[-1, 12], 1, Concat, [1]]  # cat head P4 20
+  - [-1, 1, RepNCSPELAN4, [512, 512, 256, 1]]  # 21 (P4/16-medium)
+
+  - [-1, 1, ADown, [512]] # 22
+  - [-1, 1, ShiftViTBlockv2, [512]] # 23
+  - [[-1, 9], 1, Concat, [1]]  # cat head P5 24
+  - [-1, 1, RepNCSPELAN4, [512, 512, 256, 1]]  # 25 (P5/32-large)
+
+  - [[17, 21, 25], 1, OBB, [nc,2]]  # DDetect(P3, P4, P5)
