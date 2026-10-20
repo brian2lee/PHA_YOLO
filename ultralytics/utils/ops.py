@@ -200,7 +200,7 @@ def non_max_suppression(
     max_det: int = 300,
     nc: int = 0,  # number of classes (optional)
     max_time_img: float = 0.05,
-    max_nms: int = 30000,
+    max_nms: int = 10000,
     max_wh: int = 7680,
     in_place: bool = True,
     rotated: bool = False,
