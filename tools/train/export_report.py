@@ -4,7 +4,7 @@ from ultralytics import YOLO
 import torch
 
 ROOT = Path("/workspace/PHA_YOLO")
-RUN = ROOT / "runs/obb/pha_test_b4_6006"
+RUN = ROOT / "runs/obb/pha_dsconv_b4_600"
 WEIGHTS = RUN / "weights/best.pt"
 CSV = RUN / "results.csv"
 REPORT = ROOT / "backup/pha_mvtec_screws_report.txt"

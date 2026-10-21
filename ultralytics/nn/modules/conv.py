@@ -214,7 +214,33 @@ class DWConv(Conv):
             act (bool | nn.Module): Activation function.
         """
         super().__init__(c1, c2, k, s, g=math.gcd(c1, c2), d=d, act=act)
+        
+class DSConv(nn.Module):
+    """Depthwise-separable convolution"""
 
+    def __init__(self, c1, c2, k=3, s=1, d=1, act=True):
+        super().__init__()
+
+        # Depthwise convolution: spatial filtering per input channel
+        self.dw = Conv(
+            c1, c1,
+            k=k,
+            s=s,
+            g=c1,
+            d=d,
+            act=act,
+        )
+
+        # Pointwise convolution: mix channels and set output channels
+        self.pw = Conv(
+            c1, c2,
+            k=1,
+            s=1,
+            act=act,
+        )
+
+    def forward(self, x):
+        return self.pw(self.dw(x))
 
 class DWConvTranspose2d(nn.ConvTranspose2d):
     """Depth-wise transpose convolution module."""
