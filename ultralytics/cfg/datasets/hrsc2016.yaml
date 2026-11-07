@@ -1,0 +1,8 @@
+path: /workspace/PHA_YOLO/datasets/HRSC2016
+
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: ship
