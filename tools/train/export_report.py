@@ -3,7 +3,7 @@ import pandas as pd
 from ultralytics import YOLO
 
 ROOT = Path("/workspace/PHA_YOLO")
-RUN = ROOT / "runs/obb/pha_hrsc2016_b4_600"
+RUN = ROOT / "runs/obb/pha_dscov_hrsc2016_b4_600"
 WEIGHTS = RUN / "weights/best.pt"
 CSV = RUN / "results.csv"
 REPORT = ROOT / "backup/pha_hrsc2016_b4_600.txt"

@@ -28,7 +28,10 @@ Download [MVTec](https://www.mvtec.com/company/research/datasets/mvtec-screws), 
 
   - Start Training
 ```
-python3 tools/train/train_test.py
+python3 tools/tests/train_mvtec.py
+python3 tools/tests/train_HRSC2016.py
+python3 tools/tests/train_lw_mvtec.py
+python3 tools/tests/train_lw_HRSC2016.py
 ```
   - Resume Training
   

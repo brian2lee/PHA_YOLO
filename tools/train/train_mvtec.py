@@ -16,7 +16,7 @@ def main():
         amp=False,
         optimizer="SGD",
         pretrained=False,
-        patience=100,
+        patience=0,
         name="pha_test_b4_600",
         project="/workspace/PHA_YOLO/runs/obb",
         seed=0,
