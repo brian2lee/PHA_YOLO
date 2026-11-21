@@ -3,7 +3,7 @@ from ultralytics import YOLO
 
 def main():
     model = YOLO(
-        "/workspace/PHA_YOLO/ultralytics/cfg/models/v8/yolov8-obb_PHA.yaml",
+        "/workspace/PHA_YOLO/ultralytics/cfg/models/v9/yolov9c_PHA.yaml",
         task="obb",
     )
 
