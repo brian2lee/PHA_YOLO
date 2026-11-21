@@ -1,0 +1,60 @@
+*** git ***
+git clone https://github.com/RVL224/PHA_YOLO2.git
+>Change the folder name to PHA_YOLO
+
+*** docker ***
+cd PHA_YOLO/docker
+
+docker build -t pha .
+
+#docker run -it -d --gpus all --name pha_yolo -v /home/brian/PHA_YOLO/dataset:/workspace/PHA_YOLO/datasets -v /home/brian/PHA_YOLO:/workspace/PHA_YOLO --shm-size=64g pha
+
+docker run -it -d \
+  --gpus all \
+  --name pha_yolo \
+  -v /home/brian/PHA_YOLO:/workspace/PHA_YOLO \
+  --shm-size=64g \
+  -w /workspace/PHA_YOLO \
+  pha
+
+cd PHA_YOLO
+
+docker start pha_yolo
+
+docker exec -it pha_yolo /bin/bash
+
+python3 -m pip install -e .
+
+*** train ***
+@@@ changed max_nms in /home/brian/PHA_YOLO/ultralytics/utils/ops.py for less gpu mem
+python3 tools/train/train_mvtec.py
+>best epoch at /workspace/PHA_YOLO/runs/obb/
+
+# resume training
+> change checkpoint /home/brian/PHA_YOLO/tools/train/resume_pha.py
+python3 tools/train/resume_pha.py
+
+#check last epoch
+python3 - <<'PY'
+import torch
+
+path = "/workspace/PHA_YOLO/runs/obb/pha_test_b4_600/weights/last.pt"
+ckpt = torch.load(path, map_location="cpu", weights_only=False)
+
+print("Saved epoch index:", ckpt.get("epoch"))
+print("Next epoch:", ckpt.get("epoch", -1) + 2)
+print("Best fitness:", ckpt.get("best_fitness"))
+print("Optimizer saved:", ckpt.get("optimizer") is not None)
+PY
+
+#export result
+python3 tools/train/export_report.py
+
+*** remove extra weight ***
+#remove all weight and reports
+rm -rf /workspace/PHA_YOLO/backup/* \
+  /workspace/PHA_YOLO/runs/obb/*
+
+*** test ***
+python3 tools/tests/test_mvtec.py
+
