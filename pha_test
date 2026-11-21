@@ -37,7 +37,7 @@ docker exec -it pha_yolo /bin/bash
 python3 -m pip install -e .
 
 *** dataset ***
-https://www.kaggle.com/datasets/guofeng/hrsc2016
+#https://www.kaggle.com/datasets/guofeng/hrsc2016
 https://www.mvtec.com/research-teaching/datasets/mvtec-screws
 
 change folder name to HRSC2016, MVTec_screws

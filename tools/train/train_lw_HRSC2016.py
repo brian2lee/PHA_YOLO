@@ -11,7 +11,7 @@ def main():
         data="/workspace/PHA_YOLO/ultralytics/cfg/datasets/hrsc2016.yaml",
         epochs=600,
         imgsz=640,
-        batch=4,
+        batch=16,
         device=0,
         amp=False,
         optimizer="SGD",
