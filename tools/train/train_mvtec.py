@@ -12,7 +12,7 @@ def main():
         epochs=600,
         imgsz=640,
         batch=16,
-        device=0,
+        device=[0,1],
         amp=False,
         optimizer="SGD",
         pretrained=False,

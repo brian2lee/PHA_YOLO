@@ -6,7 +6,7 @@ import cv2
 
 
 # Dataset root
-ROOT = Path("/workspace/PHA_YOLO/datasets/HRSC2016")
+ROOT = Path("/workspace/PHA_YOLO/datasets/HRSC2016") #change to dataset location
 
 IMAGE_DIR = ROOT / "AllImages"
 ANNOTATION_DIR = ROOT / "Annotations"

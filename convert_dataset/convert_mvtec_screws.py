@@ -3,7 +3,7 @@ import math
 import os
 from pathlib import Path
 
-root = Path("/workspace/PHA_YOLO/datasets/MVTec_screws")
+root = Path("/workspace/PHA_YOLO/datasets/MVTec_screws") #change to dataset location
 image_root = root / "images"
 
 splits = {

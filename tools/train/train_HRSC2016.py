@@ -3,7 +3,7 @@ from ultralytics import YOLO
 
 def main():
     model = YOLO(
-        "/workspace/PHA_YOLO/ultralytics/cfg/models/v8/yolov8-obb_PHA_HRSC2016.yaml",
+        "/workspace/PHA_YOLO/ultralytics/cfg/models/v9/yolov9c_PHA_hrsc.yaml",
         task="obb",
     )
 
@@ -12,7 +12,7 @@ def main():
         epochs=600,
         imgsz=640,
         batch=16,
-        device=0,
+        device=[0,1],
         amp=False,
         optimizer="SGD",
         pretrained=False,

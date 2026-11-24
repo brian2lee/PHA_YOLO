@@ -175,4 +175,4 @@ pnnx*
 # calibration image
 calibration_*.npy
 
-backup/
+.Trash-0/

@@ -1,4 +1,4 @@
 from ultralytics import YOLO
-model = YOLO('/workspace/PHA_YOLO/runs/obb/your_train_name/weights/best.pt')
-results = model('your_datasets_path/hrscms_OR_hrsc_OR_dota/images/test', save=True, show_labels=False, name="demo")
+model = YOLO('/workspace/PHA_YOLO/runs/obb/pha_test_b4_600/weights/best.pt')
+results = model('/workspace/PHA_YOLO/datasets/MVTec_screws/images/test', save=True, show_labels=False, name="demo")
 

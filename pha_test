@@ -76,5 +76,5 @@ rm -rf /workspace/PHA_YOLO/backup/* \
   /workspace/PHA_YOLO/runs/obb/*
 
 *** test ***
-python3 tools/tests/test_mvtec.py
-
+python3 tools/test/test_mvtec.py
+python3 tools/test/test_hrsc.py
